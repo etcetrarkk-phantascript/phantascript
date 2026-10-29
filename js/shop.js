@@ -1,7 +1,8 @@
 /* ===== CHUNK 9: CLIENT SHOP (payment, plans), LIBRARY, FORMATTING, SHARE ===== */
-function fmt(t){ // **bold**  *italic*  # big heading  ## heading ; line breaks stay exactly as typed
-  let h=esc(t).split('\n').map(l=>/^## /.test(l)?'<h3>'+l.slice(3)+'</h3>':/^# /.test(l)?'<h2>'+l.slice(2)+'</h2>':l).join('\n');
-  return h.replace(/\*\*([^*\n]+)\*\*/g,'<b>$1</b>').replace(/\*([^*\s][^*\n]*)\*/g,'<i>$1</i>').replace(/(<\/h[23]>)\n/g,'$1');
+function fmt(t){ // **bold**  *italic*  __underline__  # big heading  ## heading ; line breaks stay exactly as typed
+  const span=(o,c)=>new RegExp(o+'(?=[^\\s'+c+'])((?:(?!\\n[ \\t]*\\n)[^'+c+'])+?)'+o,'g'); // may cover several lines, never crosses a blank line
+  const h=esc(t).split('\n').map(l=>/^## /.test(l)?'<h3>'+l.slice(3)+'</h3>':/^# /.test(l)?'<h2>'+l.slice(2)+'</h2>':l).join('\n');
+  return h.replace(span('\\*\\*','*'),'<b>$1</b>').replace(span('__','_'),'<u>$1</u>').replace(span('\\*','*'),'<i>$1</i>').replace(/(<\/h[23]>)\n/g,'$1');
 }
 function payBox(t,id,price){
   return `<div class="card"><h3>Pay ৳${esc(price)}</h3><p class="muted">Your ID: <b>${esc(S.user.id)}</b> · Choose how you paid:</p>
