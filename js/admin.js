@@ -22,7 +22,7 @@ async function writeForm(head,id){
   html(head+`<div class="card"><label>Title</label><input id="t" maxlength="150" value="${esc(p.title)}">
    <label>Tags (comma separated, e.g. love, rain, nature)</label><input id="tg" maxlength="200" value="${esc(p.tags)}">
    <label>Series (optional; same name = serial story, ordered by publish date)</label><input id="se" maxlength="60" value="${esc(p.series)}">
-   <label>Writing</label><div class="tb"><button class="sm alt" onclick="wrap('**','**')"><b>B</b></button> <button class="sm alt" onclick="wrap('*','*')"><i>I</i></button> <button class="sm alt" onclick="wrap('## ','')">H</button> <span class="muted" style="font-size:12px">**bold** · *italic* · ## heading · line breaks stay as typed</span></div><textarea id="b" rows="14">${esc(p.body)}</textarea>
+   <label>Writing</label><div class="tb"><button class="sm alt" onclick="wrap('**','**')"><b>B</b></button> <button class="sm alt" onclick="wrap('*','*')"><i>I</i></button> <button class="sm alt" onclick="wrap('__','__')"><u>U</u></button> <button class="sm alt" onclick="wrap('## ','')">H</button> <span class="muted" style="font-size:12px">**bold** · *italic* · __underline__ · ## heading · line breaks stay as typed</span></div><textarea id="b" rows="14">${esc(p.body)}</textarea>
    <label>Photo (optional)</label><input id="ph" type="file" accept="image/jpeg,image/png,image/webp">
    ${p.photo?'<label><input type="checkbox" id="rp"> Remove current photo</label><br><br>':''}
    <label>Type</label><select id="ty" onchange="document.getElementById('pr').disabled=this.value!=='Paid'"><option ${p.type==='Free'?'selected':''}>Free</option><option ${p.type==='Paid'?'selected':''}>Paid</option></select>
