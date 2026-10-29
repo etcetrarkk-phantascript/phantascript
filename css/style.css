@@ -86,3 +86,12 @@ nav a,nav button,.who{white-space:nowrap;flex:none}
   main{padding-left:12px;padding-right:12px}
   #prefs{top:auto;bottom:10px;left:10px;right:10px;width:auto}
 }
+
+/* ===== v3: guarantee the search bar is one line high on phones ===== */
+@media(max-width:700px){.search{flex:none !important;width:100%;max-width:none;height:auto}}
+
+/* ===== plan cards: hover effect + included-writings rows ===== */
+.pcard{cursor:pointer;transition:transform .15s,box-shadow .15s,border-color .15s}
+.pcard:hover{transform:translateY(-3px);border-color:var(--m);box-shadow:0 6px 16px rgba(128,0,0,.22)}
+.row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
