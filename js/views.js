@@ -25,7 +25,7 @@ V.post=async function(id){
   if(!p.access){
     if(!S.user){S.next=id;gate=`<div class="card"><b>Login or register to read this.</b><br><br><button onclick="go('auth','login')">Login</button> <button class="alt" onclick="go('auth','register')">Register</button></div>`}
     else if(p.reqStatus==='Pending') gate='<div class="card">Your payment request is <b>pending</b> verification. You will get an email once approved.</div>';
-    else gate=payBox('postId',p.id,p.price)+(p.offers.length?`<div class="card"><h3>Or save with a bundle / plan</h3>`+p.offers.map(o=>`<p><b>${esc(o.name)}</b> · ৳${esc(o.price)} · ${o.days?o.days+' days':'lifetime'} <button class="sm" onclick="go('buy','${esc(o.id)}')">Buy</button></p>`).join('')+'</div>':'');
+    else gate=payBox('postId',p.id,p.price)+(p.offers.length?`<div class="card"><h3>Or save with a bundle / plan</h3>`+p.offers.map(o=>`<p><a class="lnk" onclick="go('plan','${esc(o.id)}')"><b>${esc(o.name)}</b></a> · ৳${esc(o.price)} · ${o.days?o.days+' days':'lifetime'} <button class="sm" onclick="go('buy','${esc(o.id)}')">Buy</button></p>`).join('')+'</div>':'');
   }
   const L=x=>`<a class="lnk" onclick="go('post','${esc(x.id)}')">${esc(x.title)}</a>`;
   const nv=(p.prev||p.next)?`<div class="card"><b>Series: ${esc(p.series)}</b><br>${p.prev?'← '+L(p.prev):''}${p.prev&&p.next?' &nbsp;|&nbsp; ':''}${p.next?L(p.next)+' →':''}</div>`:'';
