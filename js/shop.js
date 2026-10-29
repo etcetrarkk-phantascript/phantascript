@@ -23,9 +23,20 @@ function sendReq(t,id){act(async()=>{
 },'Request sent')}
 V.shop=async function(){
   const r=await api('products');
-  html('<h2>Plans and Bundles</h2>'+(r.length?r.map(x=>`<div class="card"><h3>${esc(x.name)}</h3>
+  html('<h2>Plans and Bundles</h2>'+(r.length?r.map(x=>`<div class="card pcard" onclick="go('plan','${esc(x.id)}')"><h3>${esc(x.name)}</h3>
    <div class="meta"><span class="tag">৳${esc(x.price)}</span>${x.days?x.days+' days access':'Lifetime access'} · ${x.count} writing(s) included</div><p>${esc(x.desc)}</p>
-   ${x.status==='Active'?`<span class="tag unl">Active${x.until?' until '+esc(x.until):''}</span>`:x.status==='Pending'?'<span class="tag">Request pending</span>':`<button onclick="go('buy','${esc(x.id)}')">Buy</button>`}</div>`).join(''):'<p class="muted">No plans yet.</p>'));
+   ${x.status==='Active'?`<span class="tag unl">Active${x.until?' until '+esc(x.until):''}</span>`:x.status==='Pending'?'<span class="tag">Request pending</span>':`<button onclick="event.stopPropagation();go('buy','${esc(x.id)}')">Buy</button>`} <span class="muted" style="font-size:13px">&nbsp;View included writings →</span></div>`).join(''):'<p class="muted">No plans yet.</p>'));
+};
+V.plan=async function(id){
+  const d=await api('productDetail',{id}), save=d.value-Number(d.price);
+  const act=d.status==='Active'?`<span class="tag unl">Active${d.until?' until '+esc(d.until):''}</span>`:d.status==='Pending'?'<span class="tag">Request pending</span>':`<button onclick="go('buy','${esc(d.id)}')">Buy for ৳${esc(d.price)}</button>`;
+  html(`<div class="card"><a class="muted lnk" onclick="go('shop')">← All plans</a>
+   <h2>${esc(d.name)}</h2>
+   <div class="meta"><span class="tag">৳${esc(d.price)}</span>${d.days?d.days+' days access':'Lifetime access'}</div>
+   <p>${esc(d.desc)}</p>
+   <p><b>${d.count}</b> writing(s) · worth ৳${d.value} if bought separately${save>0?` · <b>you save ৳${save}</b>`:''}</p>
+   ${d.kind!=='Custom'?'<p class="muted" style="font-size:13px">New matching writings are added automatically.</p>':''}${act}</div>
+   <div class="card">${d.items.length?d.items.map(x=>`<div class="row"><a class="lnk" onclick="go('post','${esc(x.id)}')">${esc(x.title)}</a><span class="muted">৳${esc(x.price)}</span></div>`).join(''):'<span class="muted">No writings included yet.</span>'}</div>`);
 };
 V.buy=async function(id){
   if(!S.user){S.next='';return go('auth','login')}
