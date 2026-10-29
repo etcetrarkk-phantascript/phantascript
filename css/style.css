@@ -80,7 +80,7 @@ nav a,nav button,.who{white-space:nowrap;flex:none}
   header{position:static}
   .bar{flex-direction:column;align-items:stretch;gap:8px;padding:10px 12px}
   .brand{font-size:19px}
-  .search{max-width:none;width:100%}
+  .search{flex:none;max-width:none;width:100%}
   nav{justify-content:flex-start}
   .who{max-width:150px;overflow:hidden;text-overflow:ellipsis}
   main{padding-left:12px;padding-right:12px}
