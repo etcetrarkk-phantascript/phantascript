@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.maateen.me; font-src https://fonts.gstatic.com https://fonts.maateen.me data:; img-src 'self' data: https:; connect-src https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>PHANTASCRIPT · by Ruhul Kabir</title>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Lora&family=Open+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.maateen.me/solaiman-lipi/font.css" rel="stylesheet">
+  <link href="https://fonts.maateen.me/kalpurush/font.css" rel="stylesheet">
+  <link href="https://fonts.maateen.me/nikosh/font.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <div class="wrap bar">
+      <a class="brand" onclick="home()">PHANTASCRIPT<small>by Ruhul Kabir</small></a>
+      <div class="search"><input id="q" placeholder="Search title or writing…" onkeydown="if(event.key==='Enter')doSearch()"><button onclick="doSearch()">Search</button></div>
+      <nav id="nav"></nav>
+    </div>
+  </header>
+  <div id="prefs" class="card" style="display:none">
+    <label>Theme</label><select id="pf_th" onchange="setPref()"><option value="light">Light</option><option value="dark">Dark</option></select>
+    <label>Font</label><select id="pf_ff" onchange="setPref()"></select>
+    <label>Text size: <span id="pf_v"></span></label><input id="pf_fs" type="range" min="14" max="28" oninput="setPref()">
+  </div>
+  <main class="wrap" id="main"></main>
+  <footer class="wrap">© PHANTASCRIPT · Ruhul Kabir</footer>
+  <div id="toast"></div>
+  <script src="js/config.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/views.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/shop.js"></script>
+  <script src="js/admin2.js"></script>
+  <script>boot();</script>
+</body>
+</html>
